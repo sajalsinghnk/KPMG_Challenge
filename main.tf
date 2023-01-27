@@ -57,3 +57,4 @@ resource "aws_subnet" "pub-b" {
     Name = "Public - b"
   }
 }
+
