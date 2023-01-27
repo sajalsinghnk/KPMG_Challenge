@@ -5,7 +5,7 @@ resource "aws_vpc" "myvpc"{
 }
 
 #--------------------------------------------------------------------------------------------------------------------------------
-# To Create public subnets in 2 availability zone
+# To Create public subnets in 2 availability zone 
 
 resource "aws_subnet" "PublicSubnetA"{
     vpc_id = aws_vpc.myvpc.id
