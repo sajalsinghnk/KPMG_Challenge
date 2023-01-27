@@ -4,7 +4,7 @@ resource "aws_vpc" "myvpc"{
     cidr_block = "10.0.0.0/16"
 }
 
-
+#--------------------------------------------------------------------------------------------------------------------------------
 # To Create public subnets in 2 availability zone
 
 resource "aws_subnet" "PublicSubnetA"{
@@ -19,7 +19,7 @@ resource "aws_subnet" "PublicSubnetB"{
     availability_zone = "us-east-1b"
 }
 
-
+#--------------------------------------------------------------------------------------------------------------------------------
 # To create private subnets in 2 availability zone
 
 resource "aws_subnet" "PrivSubnetA"{
@@ -34,14 +34,14 @@ resource "aws_subnet" "PrivSubnetB"{
     availability_zone = "us-east-1b"
 }
 
-
+#--------------------------------------------------------------------------------------------------------------------------------
 # To create Internet Gateway
 
 resource "aws_internet_gateway" "myIgw"{
     vpc_id = aws_vpc.myvpc.id
 }
 
-
+#--------------------------------------------------------------------------------------------------------------------------------
 # To create route Tables for public subnet
 
 resource "aws_route_table" "PublicRT"{
@@ -52,7 +52,7 @@ resource "aws_route_table" "PublicRT"{
     }
 }
  
-
+#--------------------------------------------------------------------------------------------------------------------------------
 # To create route table association with public subnets 
 
 resource "aws_route_table_association" "PublicRTAssociationA"{
