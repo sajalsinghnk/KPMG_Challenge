@@ -8,21 +8,33 @@ resource "aws_vpc" "myvpc"{
 }
 
 
-# To Create a public subnet
+# To Create public subnets in 2 availability zone
 
-resource "aws_subnet" "PublicSubnet"{
+resource "aws_subnet" "PublicSubnetA"{
     vpc_id = aws_vpc.myvpc.id
+    cidr_block = "10.0.0.0/28"
     availability_zone = "us-east-1a"
-    cidr_block = "10.0.1.0/24"
+}
+
+resource "aws_subnet" "PublicSubnetB"{
+    vpc_id = aws_vpc.myvpc.id
+    cidr_block = "10.0.0.16/28"
+    availability_zone = "us-east-1b"
 }
 
 
-# To create a private subnet
+# To create private subnets in 2 availability zone
 
-resource "aws_subnet" "PrivSubnet"{
+resource "aws_subnet" "PrivSubnetA"{
     vpc_id = aws_vpc.myvpc.id
-    cidr_block = "10.0.2.0/24"
-    map_public_ip_on_launch = true
+    cidr_block = "10.0.0.32/28"
+    availability_zone = "us-east-1a"
+}
+
+resource "aws_subnet" "PrivSubnetB"{
+    vpc_id = aws_vpc.myvpc.id
+    cidr_block = "10.0.0.48/28"
+    availability_zone = "us-east-1b"
 }
 
 
@@ -44,9 +56,14 @@ resource "aws_route_table" "PublicRT"{
 }
  
 
-# To create route table association with public subnet 
+# To create route table association with public subnets 
 
-resource "aws_route_table_association" "PublicRTAssociation"{
-    subnet_id = aws_subnet.PublicSubnet.id
+resource "aws_route_table_association" "PublicRTAssociationA"{
+    subnet_id = aws_subnet.PublicSubnetA.id
+    route_table_id = aws_route_table.PublicRT.id
+}
+
+resource "aws_route_table_association" "PublicRTAssociationB"{
+    subnet_id = aws_subnet.PublicSubnetB.id
     route_table_id = aws_route_table.PublicRT.id
 }
